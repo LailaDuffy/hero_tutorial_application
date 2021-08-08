@@ -5,7 +5,7 @@ public class District {
     private String title;
     private String city;
     private int districtId;
-    ArrayList<Hero> heroesInTheDistrict = new ArrayList<Hero>();
+    private ArrayList<Hero> heroesInTheDistrict = new ArrayList<Hero>();
 
     public District() {
     }
@@ -45,14 +45,13 @@ public class District {
         return averageLevelInDistrict;
     }
 
-
     @Override
     public String toString() {
-        return "District{" +
-                "title='" + title + '\'' +
-                ", city='" + city + '\'' +
-                ", districtId=" + districtId +
-                ", heroesInTheDistrict=" + heroesInTheDistrict +
+        return "District {" +
+                "title = '" + title + '\'' +
+                ", city = '" + city + '\'' +
+                ", districtId = " + districtId +
+                ", heroesInTheDistrict = " + heroesInTheDistrict +
                 '}';
     }
 

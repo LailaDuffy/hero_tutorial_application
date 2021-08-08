@@ -1,20 +1,16 @@
-public class Hero {
-    private static String name;
-    private String surname;
-    private String nickname;
+public class Hero extends Person{
+
     private int heroID;
-    private HeroType heroType;
     private int deedTime;
 
     public Hero() {
     }
 
-    public Hero(String name, String surname, String nickname, int heroID, HeroType heroType, int deedTime) {
-        this.name = name;
-        this.surname = surname;
-        this.nickname = nickname;
+    public Hero(String name,String surname, String nickname, int heroID, int deedTime) {
+        super.name = name;
+        super.surname = surname;
+        super.nickname = nickname;
         this.heroID = heroID;
-        this.heroType = heroType;
         this.deedTime = deedTime;
     }
 
@@ -30,44 +26,12 @@ public class Hero {
         }
     }
 
-    public static String getName() {
-        return name;
-    }
-
-    public static void setName(String name) {
-        Hero.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getHeroID() {
+   public int getHeroID() {
         return heroID;
     }
 
     public void setHeroID(int heroID) {
         this.heroID = heroID;
-    }
-
-    public HeroType getHeroType() {
-        return heroType;
-    }
-
-    public void setHeroType(HeroType heroType) {
-        this.heroType = heroType;
     }
 
     public int getDeedTime() {
@@ -77,10 +41,18 @@ public class Hero {
     public void setDeedTime(int deedTime) {
         this.deedTime = deedTime;
     }
+
+    @Override
+    public String toString() {
+        return "Hero {" +
+                "heroID = " + heroID +
+                ", deedTime = " + deedTime +
+                ", name = '" + name + '\'' +
+                ", surname = '" + surname + '\'' +
+                ", nickname = '" + nickname + '\'' +
+                '}';
+    }
 }
 
-enum HeroType {
-    Hero,
-    Villain
-}
+
 
