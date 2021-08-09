@@ -45,6 +45,12 @@ public class District {
         return averageLevelInDistrict;
     }
 
+    public void infoAboutHeroesInDistrict() {
+        for (Hero eachHero : heroesInTheDistrict) {
+            System.out.println(eachHero.toString());
+        }
+    }
+
     @Override
     public String toString() {
         return "District {" +

@@ -1,6 +1,6 @@
 public class Person {
 
-    protected static String name;
+    protected String name;
     protected String surname;
     protected String nickname;
 
@@ -13,7 +13,7 @@ public class Person {
         this.nickname = nickname;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 

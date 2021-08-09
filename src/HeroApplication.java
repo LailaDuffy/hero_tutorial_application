@@ -79,7 +79,7 @@ public class HeroApplication {
         // Create new villains
         Villain villain1 = new Villain("Muris", "", "Mr Catvil", 7867, 20);
         Villain villain2 = new Villain("Boo", "MacGhost", "GhostRider", 65566, 35);
-        Villain villain3 = new Villain("North", "Gale", "TornadoMan", 77898, 88);
+        Villain villain3 = new Villain("North", "Gale", "TornadoMan", 77898, 8);
 
         // Create an arraylist for all villains and put all the villains in it
         ArrayList<Villain> villainArrayList = new ArrayList<>();
@@ -235,6 +235,15 @@ public class HeroApplication {
                     System.out.println("Here is information about all heroes");
                     System.out.println();
 
+                    // Information about heroes
+                    for (Hero eachHero : heroesInTheDistrict1) {
+                        System.out.println(eachHero.toString());
+                    }
+                    for (Hero eachHero : heroesInTheDistrict2) {
+                        System.out.println(eachHero.toString());
+                    }
+                    System.out.println();
+
                     // Find out heroes Level
                     System.out.println("MilkMan's hero level is: " + hero1.calculatedLevel());
                     System.out.println("StrayCat's hero level is: " + hero2.calculatedLevel());
@@ -255,12 +264,12 @@ public class HeroApplication {
                     System.out.println("Heroes with Level above 1: " + hasLevelAbove1);
                     System.out.println();
 
-                    // Find out if any hero is named John
+                    /*// Find out if any hero is named John
                     if (Hero.getName().equals("John")) {
                         System.out.println("There is at least one hero named John");
                     } else {
                         System.out.println("There are no heroes named John");
-                    }
+                    }*/
                     System.out.println();
                     break;
                 case 6:
