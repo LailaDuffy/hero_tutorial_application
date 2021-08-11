@@ -5,49 +5,72 @@ public class District {
     private String title;
     private String city;
     private int districtId;
-    private ArrayList<Hero> heroesInTheDistrict = new ArrayList<Hero>();
+    private ArrayList<Person> personInTheDistrict = new ArrayList<>();
+
 
     public District() {
     }
 
-    public District(String title, String city, int districtId, ArrayList<Hero> heroesInTheDistrict) {
+    public District(String title, String city, int districtId, ArrayList<Person> personInTheDistrict) {
         this.title = title;
         this.city = city;
         this.districtId = districtId;
-        this.heroesInTheDistrict = heroesInTheDistrict;
+        this.personInTheDistrict = personInTheDistrict;
     }
 
-    public boolean addNewHero(Hero hero) {
-        return heroesInTheDistrict.add(hero);
+    public boolean addNewPerson(Person person) {
+        return personInTheDistrict.add(person);
     }
 
-    public Hero removeHero(int index) {
-        return heroesInTheDistrict.remove(index);
+    public Person removePerson(int index) {
+        return personInTheDistrict.remove(index);
     }
 
     public float calculateAvgDeedTime() {
         float totalDeedTime = 0f;
-        for (Hero eachHero : heroesInTheDistrict) {
-            totalDeedTime = eachHero.getDeedTime();
+        for (Person eachPerson : personInTheDistrict) {
+            if (eachPerson instanceof Hero) {
+                totalDeedTime = ((Hero) eachPerson).getDeedTime();
+            }
         }
-        float averageDeedTime = totalDeedTime/ heroesInTheDistrict.size();
+
+        int amountOfHeroes = 0;
+        for (Person eachPerson : personInTheDistrict) {
+            if (eachPerson instanceof Hero) {
+                amountOfHeroes++;
+            }
+        }
+        float averageDeedTime = totalDeedTime/ amountOfHeroes;
 
         return averageDeedTime;
     }
 
     public float calculateAvgLevelInDistrict() {
         float totalLevelOfDistrict = 0f;
-        for (Hero eachHero : heroesInTheDistrict) {
-            totalLevelOfDistrict += eachHero.calculatedLevel();
+        for (Person eachPerson : personInTheDistrict) {
+            if (eachPerson instanceof Hero) {
+                totalLevelOfDistrict += ((Hero) eachPerson).calculatedLevel();
+            }
         }
-        float averageLevelInDistrict = totalLevelOfDistrict/ heroesInTheDistrict.size();
+
+        int amountOfHeroes = 0;
+        for (Person eachPerson : personInTheDistrict) {
+            if (eachPerson instanceof Hero) {
+                amountOfHeroes ++;
+            }
+        }
+        float averageLevelInDistrict = totalLevelOfDistrict/ amountOfHeroes;
 
         return averageLevelInDistrict;
     }
 
-    public void infoAboutHeroesInDistrict() {
-        for (Hero eachHero : heroesInTheDistrict) {
-            System.out.println(eachHero.toString());
+    public int amountOfPersonsInDistrict() {
+        return personInTheDistrict.size();
+    }
+
+    public void infoAboutPersonsInDistrict() {
+        for (Person eachPerson : personInTheDistrict) {
+            System.out.println(((Hero) eachPerson).toString());
         }
     }
 
@@ -57,7 +80,7 @@ public class District {
                 "title = '" + title + '\'' +
                 ", city = '" + city + '\'' +
                 ", districtId = " + districtId +
-                ", heroesInTheDistrict = " + heroesInTheDistrict +
+                ", personInTheDistrict = " + personInTheDistrict +
                 '}';
     }
 
@@ -85,11 +108,11 @@ public class District {
         this.districtId = districtId;
     }
 
-    public ArrayList<Hero> getHeroesInTheDistrict() {
-        return heroesInTheDistrict;
+    public ArrayList<Person> getPersonInTheDistrict() {
+        return personInTheDistrict;
     }
 
-    public void setHeroesInTheDistrict(ArrayList<Hero> heroesInTheDistrict) {
-        this.heroesInTheDistrict = heroesInTheDistrict;
+    public void setPersonInTheDistrict(ArrayList<Person> personInTheDistrict) {
+        this.personInTheDistrict = personInTheDistrict;
     }
 }

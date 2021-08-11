@@ -46,25 +46,33 @@ public class HeroApplication {
         Hero hero6 = new Hero("Ziggy", "Stardust", "GuitarMan", 22141, 19);
         Hero hero7 = new Hero("Nancy", "Stardust", "LadyStar", 33474, 3);
 
+        // Create new villains
+        Villain villain1 = new Villain("Muris", "", "Mr Catvil", 7867, 20);
+        Villain villain2 = new Villain("Boo", "MacGhost", "GhostRider", 65566, 35);
+        Villain villain3 = new Villain("North", "Gale", "TornadoMan", 77898, 8);
+
         // Create new array lists and districts
-        ArrayList<Hero> heroesInTheDistrict1 = new ArrayList<>();
-        ArrayList<Hero> heroesInTheDistrict2 = new ArrayList<>();
-        District district1 = new District("Lakeside", "Mexico", 11, heroesInTheDistrict1);
-        District district2 = new District("Crabbs Cross", "Oslo", 9, heroesInTheDistrict2);
+        ArrayList<Person> personInTheDistrict1 = new ArrayList<>();
+        ArrayList<Person> personInTheDistrict2 = new ArrayList<>();
+        District district1 = new District("Lakeside", "Mexico", 11, personInTheDistrict1);
+        District district2 = new District("Crabbs Cross", "Oslo", 9, personInTheDistrict2);
 
         // Add heroes to the two districts
-        district1.addNewHero(hero1);
-        district1.addNewHero(hero2);
-        district1.addNewHero(hero3);
-        district2.addNewHero(hero4);
-        district2.addNewHero(hero5);
-        district2.addNewHero(hero6);
-        district2.addNewHero(hero7);
+        district1.addNewPerson(hero1);
+        district1.addNewPerson(hero2);
+        district1.addNewPerson(hero3);
+        district1.addNewPerson(villain1);
+        district1.addNewPerson(villain2);
+        district2.addNewPerson(hero4);
+        district2.addNewPerson(hero5);
+        district2.addNewPerson(hero6);
+        district2.addNewPerson(hero7);
+        district2.addNewPerson(villain3);
 
-        // Remove one hero from the district2
-        district2.removeHero(3);
+        /*// Remove one hero from the district2
+        district2.removePerson(3);
         System.out.println(district2.toString());
-        System.out.println();
+        System.out.println(); */
 
         // Create an array list of districts and put both districts in the list
         ArrayList<District> listOfDistricts = new ArrayList<>();
@@ -73,13 +81,8 @@ public class HeroApplication {
 
         // Delete the first district
         /*district1 = null;
-        System.out.println(heroesInTheDistrict1.toString());
+        System.out.println(personInTheDistrict1.toString());
         System.out.println();*/
-
-        // Create new villains
-        Villain villain1 = new Villain("Muris", "", "Mr Catvil", 7867, 20);
-        Villain villain2 = new Villain("Boo", "MacGhost", "GhostRider", 65566, 35);
-        Villain villain3 = new Villain("North", "Gale", "TornadoMan", 77898, 8);
 
         // Create an arraylist for all villains and put all the villains in it
         ArrayList<Villain> villainArrayList = new ArrayList<>();
@@ -236,11 +239,11 @@ public class HeroApplication {
                     System.out.println();
 
                     // Information about heroes
-                    for (Hero eachHero : heroesInTheDistrict1) {
-                        System.out.println(eachHero.toString());
+                    for (Person eachPerson : personInTheDistrict1) {
+                        System.out.println(eachPerson.toString());
                     }
-                    for (Hero eachHero : heroesInTheDistrict2) {
-                        System.out.println(eachHero.toString());
+                    for (Person eachPerson : personInTheDistrict2) {
+                        System.out.println(eachPerson.toString());
                     }
                     System.out.println();
 
@@ -281,14 +284,30 @@ public class HeroApplication {
                     System.out.println(district2.toString());
                     System.out.println();
 
+                    // Find out which district(s) have the largest amount of people
+                    ArrayList<District> listOfLargestDistricts = new ArrayList<>();
+                    int largestNumberOfPeopleInDistrict = 0;
+                    for (District eachDistrict : listOfDistricts) { // find out the largest district
+                        if (eachDistrict.amountOfPersonsInDistrict() > largestNumberOfPeopleInDistrict) {
+                            largestNumberOfPeopleInDistrict = eachDistrict.amountOfPersonsInDistrict();
+                        }
+                    }
+                    for (District eachDistrict : listOfDistricts) { // check if there is more than one largest district
+                        if (eachDistrict.amountOfPersonsInDistrict() == largestNumberOfPeopleInDistrict) {
+                            listOfLargestDistricts.add(eachDistrict);
+                            System.out.println(eachDistrict.getTitle());
+                        }
+                    }
+                    System.out.println();
+
                     // Calculate average level of both districts
                     System.out.println(String.format("The average Level in %s is: " + district1.calculateAvgLevelInDistrict(), district1.getTitle()));
                     System.out.println(String.format("The average Level in %s is: " + district2.calculateAvgLevelInDistrict(), district2.getTitle()));
                     System.out.println();
 
                     // Calculate how many heroes are in both districts together
-                    int amountOfHeroes = heroesInTheDistrict1.size() + heroesInTheDistrict2.size();
-                    System.out.println("The total amount of heroes in both districts is: " + amountOfHeroes);
+                    int amountOfPerson = personInTheDistrict1.size() + personInTheDistrict2.size();
+                    System.out.println("The total amount of persons in both districts is: " + amountOfPerson);
                     System.out.println();
 
                     // Calculate the average Level of both districts
@@ -324,11 +343,9 @@ public class HeroApplication {
                     // Find which villain is involved in the most crimes
                     Villain largestCrimeVillain = new Villain();
                     for (Villain eachVillain : villainArrayList) {
-                        for (Villain everyVillain : villainArrayList) {
-                            if (eachVillain.getCrimeTime() < everyVillain.getCrimeTime()) {
-                                largestCrimeVillain.setNickname(everyVillain.getNickname());
-                            }
-                        }
+                        if (eachVillain.getCrimeTime() > largestCrimeVillain.getCrimeTime()) {
+                             largestCrimeVillain = eachVillain;
+                           }
                     }
                     System.out.println("The villain with the largest crime time is: " + largestCrimeVillain.getNickname());
                     System.out.println();
@@ -339,6 +356,114 @@ public class HeroApplication {
 
         } while (menuEntry != 0);
 
+    }
+
+    private static void showListOfHeroes(String[] heroList) {
+        System.out.println("======== SUPERHERO LIST +++++++++");
+        for (String heroName : heroList) {
+            System.out.println(heroName);
+        }
+        System.out.println();
+    }
+
+    private static void addNewHero(Scanner scanner, String[] heroList) {
+        System.out.println("Enter hero's name: ");
+        String newHeroName = scanner.next();
+        heroList = addNewHero(heroList, newHeroName);
+    }
+
+    private static void showSpecificHeroInformation(Scanner scanner, String[] heroList) {
+        // Show different information, based on selected superhero!
+        System.out.println("Which superhero info to print?");
+        int superheroIndex = scanner.nextInt();
+        // String superHeroName = scanner.next();
+
+        System.out.println("Hero name: " + heroList[superheroIndex]);
+
+        // Variable initialization
+        String heroName;
+        String heroCity;
+        String heroPower1, heroPower2, heroPower3;
+        boolean isEvil;
+        double heroSalary;
+        String realName;
+        String universe;
+
+        // Variable assignment
+        heroName = "TurboSnail";
+        heroCity = "Garden";
+        heroPower1 = "Speed";
+        heroPower2 = "Nitro boost";
+        heroPower3 = "";
+        isEvil = false;
+        heroSalary = 12.55;
+        realName = "Jim";
+        universe = "Bugs";
+
+        // Print out Hero information card
+        System.out.println("****************************");
+        System.out.println("***** HERO INFORMATION *****");
+        System.out.println("****************************");
+
+        System.out.println("Hero name: " + heroName);
+        System.out.println("This hero lives in: " + heroCity);
+
+        System.out.println("----------------------------");
+        System.out.println("Hero Superpowers: ");
+        System.out.println("---" + heroPower1);
+        System.out.println("---" + heroPower2);
+        System.out.println("---" + heroPower3);
+
+        System.out.println("Is this super hero is evil? " + isEvil);
+
+        System.out.println("This hero earns: " + heroSalary + " EUR");
+        System.out.println(realName + " hides his identity.");
+        System.out.println("Hero lives in " + universe + " Universe");
+        System.out.println();
+        System.out.println("****************************");
+        System.out.println("***** HERO INFORMATION *****");
+        System.out.println("****************************");
+
+        // If a hero is a villain or a hero
+        if (isEvil) {
+            System.out.println("Hero is a villain. he is stealing cookies!!!");
+        } else {
+            System.out.println("Hero protects the city!");
+        }
+
+        heroCity = "Metropolis";
+
+        switch (heroCity) {
+            case "New York":
+                heroSalary = 2000;
+                break;
+            case "Riga":
+                heroSalary = 1200.91;
+                break;
+            case "Metropolis":
+                heroSalary = 1000000;
+                break;
+            default:
+                heroSalary = 100;
+        }
+
+        System.out.println("Hero's new salary: " + heroSalary);
+        // How many cookies can superhero purchase for his /her salary
+        // 1 cookie costs = 1.29 euro
+        System.out.println("**********************************");
+        System.out.println("********** Financials ***************");
+        int numOfCookies = (int) Math.floor(heroSalary / 1.29);
+        System.out.println("Hero can purchase: " + numOfCookies + " cookies");
+        double averageDailySalary = Math.round((heroSalary / 30 * 100)) / 100;
+        System.out.println("Hero average daily salary is: " + averageDailySalary + " euro");
+        System.out.println();
+    }
+
+    private static void removeHero(Scanner scanner, String[] heroList) {
+        System.out.println("Please enter hero index to be removed");
+        int heroIndexToDelete = scanner.nextInt();
+
+        heroList = removeHero(heroList, heroIndexToDelete);
     }
 
 }
